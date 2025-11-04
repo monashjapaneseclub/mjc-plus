@@ -13,7 +13,7 @@ const ThirdPartyAuthItem = ({
   className,
 }: ThirdPartyAuthItemProps) => {
   return (
-    <Button className="w-full flex-row items-center justify-center gap-4 border border-gray-200 py-2.5 hover:bg-gray-100 hover:border-gray-400">
+    <Button className="w-full flex-row items-center justify-center gap-4 border border-gray-200 py-2.5 hover:bg-gray-100">
       <Icon className="" />
       <p className="font-medium">{children}</p>
     </Button>
