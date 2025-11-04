@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Button from "@/src/_components/Button";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -44,12 +45,12 @@ const AuthForm = () => {
       </div>
 
       {/* ==== Button ==== */}
-      <button
-        className="mt-3 w-full rounded-md bg-black py-3 font-semibold text-white"
+      <Button
+        className="mt-3 w-full bg-black py-3 text-white"
         type="submit"
       >
         Login
-      </button>
+      </Button>
     </form>
   );
 };

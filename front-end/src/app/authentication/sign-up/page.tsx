@@ -8,10 +8,10 @@ import {
 } from "../_components";
 import SvgMjcLogo from "@/src/_components/svgs/MjcLogo";
 
-const Login = () => {
-  const MODE = "Login";
-  const FOOTERDESCRIPTION = "Forgot your password?";
-  const FOOTERACTION = "Click here";
+const SignUp = () => {
+  const MODE = "Sign up";
+  const FOOTERDESCRIPTION = "Already have an account?";
+  const FOOTERACTION = "Login";
   return (
     <div className="h-full w-full flex-col items-center bg-[#f5f4f7]">
       {/* ==== MJC Logo ==== */}
@@ -19,7 +19,7 @@ const Login = () => {
       {/* ==== Card ==== */}
       <div className="w-xs flex-col items-center rounded-2xl bg-white py-12 sm:w-lg">
         {/* ==== Content ==== */}
-        <div className="w-4/5 flex-col items-center gap-4 sm:w-3/5">
+        <div className="w-4/5 flex-col items-center gap-3 sm:w-3/5">
           <Header mode={MODE} />
           <ThirdPartyAuth mode={MODE} />
           <Divider />
@@ -31,4 +31,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
