@@ -45,7 +45,7 @@ const AuthForm = () => {
 
       {/* ==== Button ==== */}
       <button
-        className="mt-3 w-full rounded-md bg-black py-3 text-white"
+        className="mt-3 w-full rounded-md bg-black py-3 font-semibold text-white"
         type="submit"
       >
         Login
