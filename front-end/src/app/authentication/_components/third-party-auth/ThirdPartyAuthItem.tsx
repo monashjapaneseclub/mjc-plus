@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@/src/_components/Button";
 
 interface ThirdPartyAuthItemProps {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -12,10 +13,10 @@ const ThirdPartyAuthItem = ({
   className,
 }: ThirdPartyAuthItemProps) => {
   return (
-    <div className="w-full flex-row items-center justify-center gap-4 rounded-md border border-gray-200 py-2.5">
+    <Button className="w-full flex-row items-center justify-center gap-4 border border-gray-200 py-2.5 hover:bg-gray-100 hover:border-gray-400">
       <Icon className="" />
       <p className="font-medium">{children}</p>
-    </div>
+    </Button>
   );
 };
 
