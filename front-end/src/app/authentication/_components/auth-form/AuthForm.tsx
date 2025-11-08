@@ -2,8 +2,9 @@
 import { useState } from "react";
 import Button from "@/src/_components/Button";
 import Input from "@/src/_components/Input";
+import type { AuthMode } from "../../types";
 
-const AuthForm = () => {
+const AuthForm = ({ mode }: AuthMode) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,14 +20,26 @@ const AuthForm = () => {
   return (
     <form className="w-full space-y-2">
       {/* ==== Email ==== */}
-      <Input label="Email" type="text" placeholder="you@example.com" onChange={handleEmailChange} />
+      <Input
+        label="Email"
+        id="email"
+        type="text"
+        placeholder="you@example.com"
+        onChange={handleEmailChange}
+      />
 
       {/* ==== Password ==== */}
-      <Input label="Password" type="text" placeholder="Enter your password" onChange={handlePasswordChange} />
+      <Input
+        label="Password"
+        id="password"
+        type="text"
+        placeholder="Enter your password"
+        onChange={handlePasswordChange}
+      />
 
       {/* ==== Button ==== */}
       <Button className="mt-3 w-full bg-black py-3 text-white" type="submit">
-        Login
+        {mode}
       </Button>
     </form>
   );
