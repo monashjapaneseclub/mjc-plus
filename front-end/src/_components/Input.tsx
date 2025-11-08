@@ -6,7 +6,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = ({ label, error, id, className, ...props }: InputProps) => {
-  const inputId = id ?? `input-${Math.random().toString(36).slice(2, 9)}`;
+  const inputId = id
   const base =
     "w-full px-3 py-2 rounded-md border text-sm transition-colors placeholder-gray-400";
   const normal = "bg-white border-gray-300 text-gray-900";
