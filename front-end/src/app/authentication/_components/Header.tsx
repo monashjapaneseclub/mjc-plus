@@ -1,8 +1,12 @@
 import React from "react";
-import type { AuthMode } from "../types";
+import { AuthMode } from "@/src/_enums/auth.enum";
 
-const Header = ({ mode }: AuthMode) => {
-  return <h2 className="text-2xl font-bold my-2">{mode}</h2>;
+interface HeaderProps {
+  mode: AuthMode;
+}
+
+const Header = ({ mode }: HeaderProps) => {
+  return <h2 className="my-2 text-2xl font-bold">{mode}</h2>;
 };
 
 export default Header;

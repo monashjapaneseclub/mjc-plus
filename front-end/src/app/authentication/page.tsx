@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import { AuthMode } from "@/src/_enums/auth.enum";
-
 import {
   Header,
   Divider,
@@ -10,6 +8,7 @@ import {
   Footer,
 } from "./_components";
 import SvgMjcLogo from "@/src/_components/svgs/MjcLogo";
+import { AuthMode } from "@/src/_enums/auth.enum";
 
 interface AuthProps {
   mode: AuthMode;
@@ -31,7 +30,7 @@ const AuthPage = () => {
     footerActions: ["Forgot password", "Create account"],
   };
 
-  const MODE = isSignUp ? SIGNUP.mode : LOGIN.mode;
+  const MODE: AuthMode = isSignUp ? SIGNUP.mode : LOGIN.mode;
 
   return (
     <div className="h-full w-full flex-col items-center bg-[#f5f4f7]">

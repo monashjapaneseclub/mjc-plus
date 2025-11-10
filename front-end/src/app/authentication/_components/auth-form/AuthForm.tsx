@@ -2,9 +2,13 @@
 import { useState } from "react";
 import Button from "@/src/_components/Button";
 import Input from "@/src/_components/Input";
-import type { AuthMode } from "../../types";
+import { AuthMode } from "@/src/_enums/auth.enum";
 
-const AuthForm = ({ mode }: AuthMode) => {
+interface AuthFormProps {
+  mode: AuthMode
+}
+
+const AuthForm = ({ mode }: AuthFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
