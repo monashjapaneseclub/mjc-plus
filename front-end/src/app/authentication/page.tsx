@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { AuthMode } from "@/src/_enums/auth.enum";
+
 import {
   Header,
   Divider,
@@ -9,8 +11,8 @@ import {
 } from "./_components";
 import SvgMjcLogo from "@/src/_components/svgs/MjcLogo";
 
-interface AuthMode {
-  mode: "Sign up" | "Login";
+interface AuthProps {
+  mode: AuthMode;
   footerDescription: string;
   footerActions: string[];
 }
@@ -18,13 +20,13 @@ interface AuthMode {
 const AuthPage = () => {
   const [isSignUp, setIsSignUp] = useState(true);
 
-  const SIGNUP: AuthMode = {
-    mode: "Sign up",
+  const SIGNUP: AuthProps = {
+    mode: AuthMode.SIGNUP,
     footerDescription: "Already have an account?",
     footerActions: ["Login"],
   };
-  const LOGIN: AuthMode = {
-    mode: "Login",
+  const LOGIN: AuthProps = {
+    mode: AuthMode.LOGIN,
     footerDescription: "Forgot your password?",
     footerActions: ["Forgot password", "Create account"],
   };
