@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
 import { AuthMode } from "@/src/_enums/auth.enum";
@@ -21,8 +21,13 @@ const AuthForm = ({ mode }: AuthFormProps) => {
     const value = event.target.value;
     setPassword(value);
   };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
-    <form className="w-full space-y-2">
+    <form onSubmit={handleSubmit} className="w-full space-y-2">
       {/* ==== Email ==== */}
       <Input
         label="Email"
