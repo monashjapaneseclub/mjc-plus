@@ -3,12 +3,16 @@ import { FormEvent, useState } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
 import { AuthMode } from "@/src/_enums/auth.enum";
+import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
+import { supabase } from "@/src/app/supabase-client";
 
 interface AuthFormProps {
   mode: AuthMode;
 }
 
 const AuthForm = ({ mode }: AuthFormProps) => {
+  const { isSignUp, setIsSignUp } = useAuthModeContext();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,6 +28,22 @@ const AuthForm = ({ mode }: AuthFormProps) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (isSignUp) {
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      if (signUpError)
+        return console.error("Error signing up:", signUpError.message);
+    } else {
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (signInError)
+        return console.error("Error signing in:", signInError.message);
+    }
   };
 
   return (
