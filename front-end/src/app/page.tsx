@@ -10,8 +10,9 @@ export default function App() {
   const [session, setSession] = useState<Session | null>(null);
 
   const fetchSession = async () => {
-    const currentSession = await supabase.auth.getSession();
-    setSession(currentSession.data.session);
+    const { error, data } = await supabase.auth.getSession();
+    if (error) console.error(error.message);
+    setSession(data.session);
   };
 
   useEffect(() => {

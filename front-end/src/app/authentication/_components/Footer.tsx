@@ -2,10 +2,9 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
 
 const Footer = () => {
-  const authMode = useAuthModeContext();
-  const isSignUp = authMode.isSignUp;
-  const setIsSignUp = authMode.setIsSignUp;
-  if (isSignUp) {
+  const { isSignUp, setIsSignUp } = useAuthModeContext();
+
+  if (!isSignUp) {
     return (
       <div className="flex items-center gap-2 text-xs md:text-sm">
         <button
@@ -14,7 +13,7 @@ const Footer = () => {
         >
           Forgot password
         </button>
-        <span aria-hidden="true" className="font-light text-gray-400">
+        <span aria-hidden="true" className="font-light text-gray-500">
           |
         </span>
         <button
