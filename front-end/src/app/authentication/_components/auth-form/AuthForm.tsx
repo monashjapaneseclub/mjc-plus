@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useReducer } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
 import { AuthMode } from "@/src/_enums/auth.enum";
@@ -10,9 +10,44 @@ interface AuthFormProps {
   mode: AuthMode;
 }
 
+interface AuthFormState {
+  email: string;
+  password: string;
+  error: string | null;
+}
+
+interface AuthFormAction {
+  type: string;
+  key: string;
+  value: string;
+}
+
+const initialState: AuthFormState = {
+  email: "",
+  password: "",
+  error: "",
+};
+
+const reducer = (state: AuthFormState, action: AuthFormAction) => {
+  const { type, key, value } = action;
+  switch (type) {
+    case "update_input":
+      return {
+        ...state,
+        [key]: value,
+      };
+    default:
+      return state;
+  }
+};
+
 const AuthForm = ({ mode }: AuthFormProps) => {
+  /* ==== Context ==== */
   const { isSignUp, setIsSignUp } = useAuthModeContext();
+
   /* ==== States ==== */
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email: string; password: string }>({
@@ -49,7 +84,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
       if (signInError)
         return console.error("Error signing in:", signInError.message);
     }
-    console.log("Signed up successfully!")
+    console.log("Signed up successfully!");
   };
 
   return (
@@ -60,7 +95,14 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         id="email"
         type="text"
         placeholder="you@example.com"
-        onChange={handleEmailChange}
+        value={state.email}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch({
+            type: "update_input",
+            key: "email",
+            value: e.target.value,
+          })
+        }
       />
 
       {/* ==== Password ==== */}
@@ -69,7 +111,14 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         id="password"
         type="text"
         placeholder="Enter your password"
-        onChange={handlePasswordChange}
+        value={state.password}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch({
+            type: "update_input",
+            key: "password",
+            value: e.target.value,
+          })
+        }
       />
 
       {/* ==== Button ==== */}
