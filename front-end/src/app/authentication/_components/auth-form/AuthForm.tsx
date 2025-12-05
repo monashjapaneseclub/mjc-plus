@@ -1,10 +1,11 @@
 "use client";
-import { FormEvent, useState, useReducer } from "react";
+import { FormEvent, useReducer, ActionDispatch } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
-import { AuthMode } from "@/src/_enums/auth.enum";
+import { AuthMode } from "@/src/_enums/authMode.enum";
 import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
 import { supabase } from "@/src/app/supabase-client";
+import { AuthActionType } from "@/src/_enums/authActionType.enum";
 
 interface AuthFormProps {
   mode: AuthMode;
@@ -13,7 +14,8 @@ interface AuthFormProps {
 interface AuthFormState {
   email: string;
   password: string;
-  error: string | null;
+  emailError: string | undefined;
+  passwordError: string | undefined;
 }
 
 interface AuthFormAction {
@@ -25,51 +27,80 @@ interface AuthFormAction {
 const initialState: AuthFormState = {
   email: "",
   password: "",
-  error: "",
+  emailError: undefined,
+  passwordError: undefined,
 };
 
 const reducer = (state: AuthFormState, action: AuthFormAction) => {
   const { type, key, value } = action;
   switch (type) {
-    case "update_input":
+    case AuthActionType.UPDATE_INPUT:
+      return {
+        ...state,
+        [key]: value,
+        [`${key}Error`]: undefined,
+      };
+    case AuthActionType.UPDATE_ERROR:
       return {
         ...state,
         [key]: value,
       };
+
+    case AuthActionType.CLEAR_FORM:
+      return { ...initialState };
     default:
       return state;
   }
 };
 
+const regexTest = (
+  email: string,
+  password: string,
+  dispatch: ActionDispatch<[action: AuthFormAction]>,
+) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^\S{8,16}$/;
+
+  if (!emailRegex.test(email))
+    dispatch({
+      type: AuthActionType.UPDATE_ERROR,
+      key: "emailError",
+      value: "Invalid email format",
+    });
+
+  if (!passwordRegex.test(password))
+    dispatch({
+      type: AuthActionType.UPDATE_ERROR,
+      key: "passwordError",
+      value: "Password length must be within 8 to 16",
+    });
+};
+
+const clearForm = (dispatch: ActionDispatch<[action: AuthFormAction]>) => {
+  dispatch({
+    type: AuthActionType.CLEAR_FORM,
+    key: "",
+    value: "",
+  });
+};
+
 const AuthForm = ({ mode }: AuthFormProps) => {
   /* ==== Context ==== */
-  const { isSignUp, setIsSignUp } = useAuthModeContext();
+  const { isSignedUp, setIsSignedUp } = useAuthModeContext();
+  console.log(isSignedUp);
 
   /* ==== States ==== */
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email: string; password: string }>({
-    email: "",
-    password: ",",
-  });
+  const { email, password, emailError, passwordError } = state;
 
   /* ==== Handlers ==== */
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setEmail(value);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setPassword(value);
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    regexTest(email, password, dispatch);
 
-    if (isSignUp) {
+    if (emailError && passwordError) return;
+
+    if (isSignedUp) {
       const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -84,6 +115,8 @@ const AuthForm = ({ mode }: AuthFormProps) => {
       if (signInError)
         return console.error("Error signing in:", signInError.message);
     }
+
+    clearForm(dispatch);
     console.log("Signed up successfully!");
   };
 
@@ -96,9 +129,10 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         type="text"
         placeholder="you@example.com"
         value={state.email}
+        error={emailError}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           dispatch({
-            type: "update_input",
+            type: AuthActionType.UPDATE_INPUT,
             key: "email",
             value: e.target.value,
           })
@@ -112,9 +146,10 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         type="text"
         placeholder="Enter your password"
         value={state.password}
+        error={passwordError}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           dispatch({
-            type: "update_input",
+            type: AuthActionType.UPDATE_INPUT,
             key: "password",
             value: e.target.value,
           })
