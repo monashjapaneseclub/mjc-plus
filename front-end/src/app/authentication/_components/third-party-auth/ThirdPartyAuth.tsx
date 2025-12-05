@@ -1,7 +1,7 @@
 import React from "react";
 import { SvgGoogle, SvgMicrosoft } from "@/src/_components/logos";
 import ThirdPartyAuthItem from "./ThirdPartyAuthItem";
-import { AuthMode } from "@/src/_enums/auth.enum";
+import { AuthMode } from "@/src/_enums/authMode.enum";
 
 interface ThirdPartyAuthProps {
   mode: AuthMode;

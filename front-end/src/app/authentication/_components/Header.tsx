@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthMode } from "@/src/_enums/auth.enum";
+import { AuthMode } from "@/src/_enums/authMode.enum";
 
 interface HeaderProps {
   mode: AuthMode;

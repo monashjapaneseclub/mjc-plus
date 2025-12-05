@@ -8,7 +8,7 @@ import {
   Footer,
 } from "./_components";
 import SvgMjcLogo from "@/src/_components/logos/MjcLogo";
-import { AuthMode } from "@/src/_enums/auth.enum";
+import { AuthMode } from "@/src/_enums/authMode.enum";
 import { AuthModeContext } from "@/src/_contexts/AuthModeContext";
 import type { AuthModeStateProps } from "@/src/_types/AuthModeStateProps";
 import { supabase } from "../supabase-client";
@@ -23,8 +23,8 @@ const AuthPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   const authModeState: AuthModeStateProps = {
-    isSignUp: isSignUp,
-    setIsSignUp: setIsSignUp,
+    isSignedUp: isSignUp,
+    setIsSignedUp: setIsSignUp,
   };
 
   const SIGNUP: AuthProps = {
