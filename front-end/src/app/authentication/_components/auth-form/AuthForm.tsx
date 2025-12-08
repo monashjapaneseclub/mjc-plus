@@ -5,7 +5,7 @@ import Input from "@/src/_components/ui/Input";
 import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
 import { supabase } from "@/src/app/supabase-client";
 import { AuthActionType } from "@/src/_enums/authActionType.enum";
-import type { AuthFormProps, AuthFormState, AuthFormAction } from "../../type";
+import type { AuthFormState, AuthFormAction } from "../../type";
 
 const initialState: AuthFormState = {
   email: "",
@@ -68,7 +68,7 @@ const clearForm = (dispatch: ActionDispatch<[action: AuthFormAction]>) => {
   });
 };
 
-const AuthForm = ({ mode }: AuthFormProps) => {
+const AuthForm = () => {
   /* ==== Context ==== */
   const { isSignedIn, setIsSignedIn } = useAuthModeContext();
 
@@ -143,7 +143,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         className="mt-3 w-full bg-black py-3 text-white transition duration-200"
         type="submit"
       >
-        {mode}
+        Login
       </Button>
     </form>
   );

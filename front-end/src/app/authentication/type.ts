@@ -1,9 +1,3 @@
-import type { AuthMode } from "@/src/_enums/authMode.enum";
-
-export interface AuthFormProps {
-  mode: AuthMode;
-}
-
 export interface AuthFormState {
   email: string;
   password: string;

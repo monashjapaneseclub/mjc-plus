@@ -52,7 +52,7 @@ const AuthPage = () => {
             <Header mode={MODE} />
             <ThirdPartyAuth mode={MODE} />
             <Divider />
-            <AuthForm mode={MODE} />
+            <AuthForm/>
             <Footer />
           </AuthModeContext.Provider>
         </div>
