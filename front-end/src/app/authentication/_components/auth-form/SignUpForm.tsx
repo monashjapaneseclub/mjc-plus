@@ -40,7 +40,23 @@ const validateFormFields = (
   password: string,
   dispatch: ActionDispatch<[action: AuthFormAction]>,
 ) => {
-  return;
+  let hasError = false;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^\S{8,16}$/;
+  if (!emailRegex.test(email)) hasError = true;
+  dispatch({
+    type: AuthActionType.UPDATE_ERROR,
+    key: "emailError",
+    value: "Invalid email format",
+  });
+
+  if (!passwordRegex.test(password)) hasError = true;
+  dispatch({
+    type: AuthActionType.UPDATE_ERROR,
+    key: "passwordError",
+    value: "Password length must be within 8 to 16",
+  });
+  return hasError;
 };
 
 const clearForm = (dispatch: ActionDispatch<[action: AuthFormAction]>) => {
@@ -60,7 +76,7 @@ const SignUpForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const hasError = validateFormFields(email, password, dispatch);
-
+    if (hasError) return;
     // if (isSignedIn) {
     //   const { error: signUpError } = await supabase.auth.signUp({
     //     email,
