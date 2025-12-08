@@ -2,9 +2,9 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
 
 const Footer = () => {
-  const { isSignUp, setIsSignUp } = useAuthModeContext();
+  const { isSignedIn, setIsSignedIn } = useAuthModeContext();
 
-  if (!isSignUp) {
+  if (!isSignedIn) {
     return (
       <div className="flex items-center gap-2 text-xs md:text-sm">
         <button
@@ -18,7 +18,7 @@ const Footer = () => {
         </span>
         <button
           type="button"
-          onClick={() => setIsSignUp(!isSignUp)}
+          onClick={() => setIsSignedIn(!isSignedIn)}
           className="cursor-pointer text-red-600 underline hover:text-red-700"
         >
           Create account
@@ -32,7 +32,7 @@ const Footer = () => {
       Already have an account?{" "}
       <button
         type="button"
-        onClick={() => setIsSignUp(!isSignUp)}
+        onClick={() => setIsSignedIn(!isSignedIn)}
         className="cursor-pointer text-red-600 underline hover:text-red-700"
       >
         Login

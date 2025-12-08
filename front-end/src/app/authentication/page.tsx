@@ -20,11 +20,11 @@ interface AuthProps {
 }
 
 const AuthPage = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const authModeState: AuthModeStateProps = {
-    isSignedUp: isSignUp,
-    setIsSignedUp: setIsSignUp,
+    isSignedIn: isSignedIn,
+    setIsSignedIn: setIsSignedIn,
   };
 
   const SIGNUP: AuthProps = {
@@ -38,7 +38,7 @@ const AuthPage = () => {
     footerActions: ["Forgot password", "Create account"],
   };
 
-  const MODE: AuthMode = isSignUp ? SIGNUP.mode : LOGIN.mode;
+  const MODE: AuthMode = isSignedIn ? SIGNUP.mode : LOGIN.mode;
 
   return (
     <div className="flex h-full w-full flex-col items-center bg-[#f5f4f7]">

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface AuthModeStateProps {
-  isSignedUp: boolean;
-  setIsSignedUp: Dispatch<SetStateAction<boolean>>;
+  isSignedIn: boolean;
+  setIsSignedIn: Dispatch<SetStateAction<boolean>>;
 }

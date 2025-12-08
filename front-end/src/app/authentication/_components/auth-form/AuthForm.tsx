@@ -86,8 +86,7 @@ const clearForm = (dispatch: ActionDispatch<[action: AuthFormAction]>) => {
 
 const AuthForm = ({ mode }: AuthFormProps) => {
   /* ==== Context ==== */
-  const { isSignedUp, setIsSignedUp } = useAuthModeContext();
-  console.log(isSignedUp);
+  const { isSignedIn, setIsSignedIn } = useAuthModeContext();
 
   /* ==== States ==== */
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -99,8 +98,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
     regexTest(email, password, dispatch);
 
     if (emailError && passwordError) return;
-
-    if (isSignedUp) {
+    if (isSignedIn) {
       const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
