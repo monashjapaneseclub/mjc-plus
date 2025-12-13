@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Header, Divider, ThirdPartyAuth, LoginFooter } from ".././_components";
-import SvgMjcLogo from "@/src/_components/logos/MjcLogo";
+import SvgMjcLogo from "@/src/_components/svgs/MjcLogo";
 import { AuthMode } from "@/src/_enums/authMode.enum";
 import LoginForm from "../_components/auth-form/LoginForm";
 

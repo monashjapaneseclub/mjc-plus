@@ -6,7 +6,7 @@ import {
   ThirdPartyAuth,
   SignUpFooter,
 } from ".././_components";
-import SvgMjcLogo from "@/src/_components/logos/MjcLogo";
+import SvgMjcLogo from "@/src/_components/svgs/MjcLogo";
 import { AuthMode } from "@/src/_enums/authMode.enum";
 import { AuthModeContext } from "@/src/_contexts/AuthModeContext";
 import type { AuthModeStateProps } from "@/src/_types/AuthModeStateProps";

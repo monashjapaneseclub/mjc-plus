@@ -1,5 +1,5 @@
 import React from "react";
-import { SvgGoogle, SvgMicrosoft } from "@/src/_components/logos";
+import { SvgGoogle, SvgMicrosoft } from "@/src/_components/svgs";
 import ThirdPartyAuthItem from "./ThirdPartyAuthItem";
 import { AuthMode } from "@/src/_enums/authMode.enum";
 

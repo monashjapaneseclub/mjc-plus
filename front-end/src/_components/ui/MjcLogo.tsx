@@ -1,5 +1,5 @@
 import React from "react";
-import SvgMjcLogoModern from "../logos/MjcLogoModern";
+import SvgMjcLogoModern from "../svgs/MjcLogoModern";
 import { Routes } from "@/src/_enums/routes.enum";
 import Link from "next/link";
 
