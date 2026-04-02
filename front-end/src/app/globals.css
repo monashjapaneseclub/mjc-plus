@@ -34,7 +34,13 @@ body,
 
 /* Custom variables */
 @theme {
-
+  --color-primary: #ef4444;        /* red-500 */
+  --color-primary-dark: #dc2626;   /* red-600 */
+  --color-primary-light: #fef2f2;  /* red-50 */
+  --color-secondary: #111827;      /* gray-900 / black text */
+  --color-secondary-light: #6b7280; /* gray-500 */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f5f4f7;
 }
 
 /* Directives */
@@ -42,8 +48,57 @@ body,
 }
 
 @layer components {
+  /* Typography */
+  .heading {
+    @apply text-4xl font-bold text-secondary;
+  }
+
+  .subheading {
+    @apply text-2xl font-bold text-secondary;
+  }
+
+  .body-text {
+    @apply text-base text-secondary;
+  }
+
+  .caption {
+    @apply text-sm text-secondary-light;
+  }
+
+  /* Links */
+  .link-primary {
+    @apply cursor-pointer text-primary-dark underline transition-colors hover:text-primary;
+  }
+
+  /* Cards */
   .card {
-    @apply rounded-2xl p-4;
+    @apply rounded-2xl border-2 border-gray-300 bg-surface p-4 transition-colors duration-300 hover:border-primary hover:bg-primary-light;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply w-full bg-secondary py-3 text-white transition duration-200 hover:opacity-80;
+  }
+
+  .btn-outline {
+    @apply w-full border border-gray-300 py-2.5 transition duration-200 hover:bg-gray-100;
+  }
+
+  /* Carousel */
+  .carousel-nav-btn {
+    @apply shrink-0 cursor-pointer rounded-full border border-gray-300 p-2 transition hover:bg-gray-100;
+  }
+
+  .dot {
+    @apply h-2.5 w-2.5 rounded-full transition;
+  }
+
+  .dot-active {
+    @apply bg-primary;
+  }
+
+  .dot-inactive {
+    @apply bg-gray-300;
   }
 }
 
