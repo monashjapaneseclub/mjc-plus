@@ -72,7 +72,13 @@ body,
 
   /* Cards */
   .card {
-    @apply rounded-2xl border-2 border-gray-300 bg-surface p-4 transition-colors duration-300 hover:border-primary hover:bg-primary-light;
+    @apply rounded-2xl bg-surface p-4 transition-all duration-300 outline-none;
+    box-shadow: 6px 6px 12px #d1d5db, -6px -6px 12px #ffffff;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 10px 10px 20px #d1d5db, -10px -10px 20px #ffffff;
   }
 
   /* Buttons */

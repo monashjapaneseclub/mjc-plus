@@ -36,7 +36,7 @@ const SponsorCarousel = () => {
         {/* Sponsor cards */}
         <div className="flex-1 overflow-hidden">
           <div
-            className="grid gap-4 px-2 transition-transform duration-500 ease-in-out"
+            className="grid gap-6 px-4 py-4 transition-transform duration-500 ease-in-out"
             style={{
               gridTemplateColumns: `repeat(${sponsors.length}, 1fr)`,
               width: `${(sponsors.length / VISIBLE_COUNT) * 100}%`,
