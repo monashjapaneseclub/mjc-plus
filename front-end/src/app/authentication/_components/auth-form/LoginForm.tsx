@@ -1,7 +1,9 @@
 "use client";
-import { FormEvent, useReducer, ActionDispatch } from "react";
+import { FormEvent, useReducer, ActionDispatch, useState } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
+import Eye from "@/src/_components/svgs/Eye";
+import EyeOff from "@/src/_components/svgs/EyeOff";
 import { supabase } from "@/src/app/supabase-client";
 import { AuthActionType } from "@/src/_enums/authActionType.enum";
 import type { AuthFormState, AuthFormAction } from "../../type";
@@ -71,6 +73,7 @@ const LoginForm = () => {
   /* ==== States ==== */
   const [state, dispatch] = useReducer(reducer, initialState);
   const { email, password, emailError, passwordError } = state;
+  const [showPassword, setShowPassword] = useState(false);
 
   /* ==== Handlers ==== */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -117,21 +120,35 @@ const LoginForm = () => {
       />
 
       {/* ==== Password ==== */}
-      <Input
-        label="Password"
-        id="password"
-        type="text"
-        placeholder="Enter your password"
-        value={state.password}
-        error={passwordError}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch({
-            type: AuthActionType.UPDATE_INPUT,
-            key: "password",
-            value: e.target.value,
-          })
-        }
-      />
+      <div className="relative">
+        <Input
+          label="Password"
+          id="password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter your password"
+          value={state.password}
+          error={passwordError}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            dispatch({
+              type: AuthActionType.UPDATE_INPUT,
+              key: "password",
+              value: e.target.value,
+            })
+          }
+        />
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-3 top-9 text-gray-500 hover:text-gray-700 transition-colors"
+          aria-label={showPassword ? "Hide password" : "Show password"}
+        >
+          {showPassword ? (
+            <EyeOff className="w-5 h-5" />
+          ) : (
+            <Eye className="w-5 h-5" />
+          )}
+        </button>
+      </div>
 
       {/* ==== Button ==== */}
       <Button
