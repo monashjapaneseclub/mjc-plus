@@ -15,7 +15,7 @@ const Header = () => {
           {navItems.map((item, idx) => (
             <li key={idx} className="group relative">
               <Link
-                href=""
+                href={item === "About Us" ? Routes.ABOUT : ""}
                 className="block pb-1 text-inherit transition duration-200 group-hover:text-red-500"
               >
                 {item}
