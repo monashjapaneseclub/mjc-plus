@@ -112,21 +112,23 @@ const SignUpForm = () => {
     e.preventDefault();
     const hasError = validateFormFields(email, password, confirmEmail, confirmPassword, dispatch);
     if (hasError) return;
-    // if (isSignedIn) {
-    //   const { error: signUpError } = await supabase.auth.signUp({
-    //     email,
-    //     password,
-    //   });
-    //   if (signUpError)
-    //     return console.error("Error signing up:", signUpError.message);
-    // } else {
-    //   const { error: signInError } = await supabase.auth.signInWithPassword({
-    //     email,
-    //     password,
-    //   });
-    //   if (signInError)
-    //     return console.error("Error signing in:", signInError.message);
-    // }
+
+    const { data, error } = await supabase.auth.signUp({ email, password });
+
+    if (error) {
+      if (error.status === 422) {
+        dispatch({ type: AuthActionType.UPDATE_ERROR, key: "emailError", value: "Email already in use" });
+      } else if (error.status === 429) {
+        dispatch({ type: AuthActionType.UPDATE_ERROR, key: "emailError", value: "Too many attempts, please wait" });
+      } else {
+        dispatch({ type: AuthActionType.UPDATE_ERROR, key: "emailError", value: error.message });
+      }
+      return;
+    }
+
+    if (!data.session) {
+        dispatch({ type: AuthActionType.UPDATE_ERROR, key: "emailError", value: "Check your email to confirm your account" });
+    }
 
     clearForm(dispatch);
     console.log("Signed up successfully!");

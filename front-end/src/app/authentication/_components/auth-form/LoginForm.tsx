@@ -43,20 +43,32 @@ const validateFormFields = (
 ) => {
   let hasError = false;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^\S{8,16}$/;
-  if (!emailRegex.test(email)) hasError = true;
-  dispatch({
-    type: AuthActionType.UPDATE_ERROR,
-    key: "emailError",
-    value: "Invalid email format",
-  });
 
-  if (!passwordRegex.test(password)) hasError = true;
-  dispatch({
-    type: AuthActionType.UPDATE_ERROR,
-    key: "passwordError",
-    value: "Password length must be within 8 to 16",
-  });
+  if (!email) {
+    dispatch({
+      type: AuthActionType.UPDATE_ERROR,
+      key: "emailError",
+      value: "Email is required",
+    });
+    hasError = true;
+  } else if (!emailRegex.test(email)) {
+    dispatch({
+      type: AuthActionType.UPDATE_ERROR,
+      key: "emailError",
+      value: "Invalid email format",
+    });
+    hasError = true;
+  }
+
+  if (!password) {
+    dispatch({
+      type: AuthActionType.UPDATE_ERROR,
+      key: "passwordError",
+      value: "Password is required",
+    });
+    hasError = true;
+  }
+
   return hasError;
 };
 
@@ -73,6 +85,7 @@ const LoginForm = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { email, password, emailError, passwordError } = state;
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   /* ==== Handlers ==== */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -80,21 +93,39 @@ const LoginForm = () => {
     const hasError = validateFormFields(email, password, dispatch);
 
     if (hasError) return;
-    // if (isSignedIn) {
-    //   const { error: signUpError } = await supabase.auth.signUp({
-    //     email,
-    //     password,
-    //   });
-    //   if (signUpError)
-    //     return console.error("Error signing up:", signUpError.message);
-    // } else {
-    //   const { error: signInError } = await supabase.auth.signInWithPassword({
-    //     email,
-    //     password,
-    //   });
-    //   if (signInError)
-    //     return console.error("Error signing in:", signInError.message);
-    // }
+
+    setIsLoading(true);
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    setIsLoading(false);
+
+    if (error) {
+      if (error.status === 400) {
+        dispatch({
+          type: AuthActionType.UPDATE_ERROR,
+          key: "passwordError",
+          value: "Invalid email or password"
+        });
+      } else if (error.status === 429) {
+        dispatch({
+          type: AuthActionType.UPDATE_ERROR,
+          key: "emailError",
+          value: "Too many login attempts. Please try again later"
+        });
+      } else if (error.status === 500) {
+        dispatch({
+          type: AuthActionType.UPDATE_ERROR,
+          key: "emailError",
+          value: "Server error. Please try again later"
+        });
+      } else {
+        dispatch({
+          type: AuthActionType.UPDATE_ERROR,
+          key: "emailError",
+          value: error.message || "Login failed. Please try again"
+        });
+      }
+      return;
+    }
 
     clearForm(dispatch);
   };
@@ -151,10 +182,11 @@ const LoginForm = () => {
 
       {/* ==== Button ==== */}
       <Button
-        className="mt-3 w-full bg-black py-3 text-white transition duration-200"
+        className="mt-3 w-full bg-black py-3 text-white transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         type="submit"
+        disabled={isLoading}
       >
-        Login
+        {isLoading ? "Logging in..." : "Login"}
       </Button>
     </form>
   );
