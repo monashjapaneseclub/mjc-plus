@@ -6,3 +6,4 @@ export { default as SvgChevronLeft } from "./ChevronLeft";
 export { default as SvgChevronRight } from "./ChevronRight";
 export { default as Eye } from "./Eye";
 export { default as EyeOff } from "./EyeOff";
+export { default as ProfileIcon } from "./ProfileIcon";
