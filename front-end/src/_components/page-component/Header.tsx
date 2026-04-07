@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Routes } from "@/src/_enums/routes.enum";
 import MjcLogo from "../ui/MjcLogo";
 import { useAuthSessionContext } from "@/src/_contexts/AuthSessionContext";
-import { ProfileIcon } from "@/src/_components/svgs";
+import ProfileMenu from "../ui/ProfileMenu";
 
 const navItems = ["Home", "Modules", "About Us", "Sponsors"];
 
@@ -32,13 +32,11 @@ const Header = () => {
       </nav>
 
       {/* Desktop Auth Button */}
-      <div className="group relative hidden md:block">
+      <div className="hidden md:block">
         {session ? (
-          <button aria-label="Profile" className="cursor-pointer text-red-500">
-            <ProfileIcon className="w-6 h-6" />
-          </button>
+          <ProfileMenu />
         ) : (
-          <>
+          <div className="group relative">
             <Link
               href={Routes.LOGIN}
               className="cursor-pointer pb-1 text-red-500"
@@ -46,7 +44,7 @@ const Header = () => {
               Sign in
             </Link>
             <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-red-500 transition-all duration-300 ease-out group-hover:w-full"></span>
-          </>
+          </div>
         )}
       </div>
 
