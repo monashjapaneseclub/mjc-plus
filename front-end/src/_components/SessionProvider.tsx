@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/src/app/supabase-client";
 import { AuthSessionContext } from "@/src/_contexts/AuthSessionContext";
+import { AuthRedirectHandler } from "./AuthRedirectHandler";
 
 export default function SessionProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
@@ -25,6 +26,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
 
   return (
     <AuthSessionContext.Provider value={session}>
+      <AuthRedirectHandler />
       {children}
     </AuthSessionContext.Provider>
   );
