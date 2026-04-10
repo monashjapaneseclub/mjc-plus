@@ -3,9 +3,11 @@ import { Header, Footer, SponsorCarousel } from "@/src/_components/page-componen
 
 const Home = () => {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <SponsorCarousel />
+      <main className="flex-1">
+        <SponsorCarousel />
+      </main>
       <Footer />
     </div>
   );
