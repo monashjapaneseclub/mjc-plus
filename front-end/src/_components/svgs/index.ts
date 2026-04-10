@@ -7,3 +7,6 @@ export { default as SvgChevronRight } from "./ChevronRight";
 export { default as Eye } from "./Eye";
 export { default as EyeOff } from "./EyeOff";
 export { default as ProfileIcon } from "./ProfileIcon";
+export { default as SvgEmail } from "./Email";
+export { default as SvgInstagram } from "./Instagram";
+export { default as SvgDiscord } from "./Discord";
