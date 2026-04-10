@@ -50,7 +50,7 @@ const SponsorCarousel = () => {
                       alt={sponsor.name}
                       fill
                       sizes="(max-width: 768px) 80vw, 33vw"
-                      priority={idx < VISIBLE_COUNT}
+                      priority
                       className="object-cover scale-y-[1.15]"
                     />
                 </a>

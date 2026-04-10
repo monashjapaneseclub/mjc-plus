@@ -22,9 +22,8 @@ const Input = ({ label, value, error, id, className, ...props }: InputProps) => 
       <input
         id={inputId}
         value={value}
-        placeholder={props.placeholder}
         className={`${base} ${normal}`}
-        onChange={props.onChange}
+        {...props}
       />
       {error && typeof error === "string" && (
         <p className="mt-1 text-xs text-red-500">*{error}</p>

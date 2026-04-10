@@ -1,34 +1,20 @@
 "use client";
-
-import Home from "./home/page";
-import { AuthSessionContext } from "../_contexts/AuthSessionContext";
-import type { Session } from "@supabase/supabase-js";
-import { supabase } from "./supabase-client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthSessionContext } from "@/src/_contexts/AuthSessionContext";
+import { Routes } from "@/src/_enums/routes.enum";
 
 export default function App() {
-  const [session, setSession] = useState<Session | null>(null);
-
-  const fetchSession = async () => {
-    const { error, data } = await supabase.auth.getSession();
-    if (error) console.error(error.message);
-    setSession(data.session);
-  };
+  const router = useRouter();
+  const session = useAuthSessionContext();
 
   useEffect(() => {
-    fetchSession();
+    if (session) {
+      router.replace(Routes.HOME);
+    } else {
+      router.replace(Routes.LOGIN);
+    }
+  }, [session, router]);
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => setSession(session),
-    );
-
-    return () => authListener.subscription.unsubscribe();
-  }, []);
-  return (
-    <div className="h-full">
-      <AuthSessionContext.Provider value={session}>
-        <Home />
-      </AuthSessionContext.Provider>
-    </div>
-  );
+  return null;
 }
