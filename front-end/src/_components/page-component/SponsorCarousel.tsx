@@ -4,7 +4,7 @@ import { sponsors } from "@/src/_data/sponsors";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const VISIBLE_COUNT = 3;
+const VISIBLE_COUNT = 4;
 
 const SponsorCarousel = () => {
   const maxPage = Math.max(sponsors.length - VISIBLE_COUNT, 0);
@@ -20,7 +20,7 @@ const SponsorCarousel = () => {
 
 
   return (
-    <section className="flex flex-col gap-10 p-12">
+    <section className="flex flex-col gap-10 p-10">
       <h2 className="text-center text-4xl font-bold">Sponsors</h2>
 
       <div className="flex items-center gap-4">
