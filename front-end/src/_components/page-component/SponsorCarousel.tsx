@@ -4,7 +4,7 @@ import { sponsors } from "@/src/_data/sponsors";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const VISIBLE_COUNT = 4;
+const VISIBLE_COUNT = 3;
 
 const SponsorCarousel = () => {
   const maxPage = Math.max(sponsors.length - VISIBLE_COUNT, 0);
@@ -44,7 +44,7 @@ const SponsorCarousel = () => {
             }}
           >
             {sponsors.map((sponsor, idx) => (
-                <a key={idx} href={sponsor.link} target="_blank" rel="noopener noreferrer" className="card relative aspect-video overflow-hidden">
+                <a key={idx} href={sponsor.link} target="_blank" rel="noopener noreferrer" className="card relative aspect-video overflow-hidden !rounded-none">
                     <Image
                       src={sponsor.image}
                       alt={sponsor.name}
