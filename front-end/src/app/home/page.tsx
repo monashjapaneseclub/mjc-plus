@@ -1,13 +1,13 @@
 import React from "react";
 import { Header, Footer, SponsorCarousel } from "@/src/_components/page-component";
+import HomeBody from "./HomeBody";
 
 const Home = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1">
-        <SponsorCarousel />
-      </main>
+      <HomeBody />
+      <SponsorCarousel />
       <Footer />
     </div>
   );
