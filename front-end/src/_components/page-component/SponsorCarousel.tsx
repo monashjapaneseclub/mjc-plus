@@ -44,7 +44,7 @@ const SponsorCarousel = () => {
             }}
           >
             {sponsors.map((sponsor, idx) => (
-                <a key={idx} href={sponsor.link} target="_blank" rel="noopener noreferrer" className="card relative aspect-video overflow-hidden !rounded-none">
+                <a key={idx} href={sponsor.link} target="_blank" rel="noopener noreferrer" className="card relative aspect-video overflow-hidden">
                     <Image
                       src={sponsor.image}
                       alt={sponsor.name}
