@@ -4,7 +4,7 @@ import { sponsors } from "@/src/_data/sponsors";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const VISIBLE_COUNT = 4;
+const VISIBLE_COUNT = 3;
 
 const SponsorCarousel = () => {
   const maxPage = Math.max(sponsors.length - VISIBLE_COUNT, 0);

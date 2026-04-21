@@ -14,7 +14,10 @@ interface AuthPageLayoutProps {
 
 const AuhPageLayout = ({ mode, form, footer }: AuthPageLayoutProps) => {
   return (
-    <div className="flex h-full w-full flex-col items-center bg-surface-muted">
+    <div
+      className="flex h-full w-full flex-col items-center bg-surface-muted"
+      style={{ fontFamily: "var(--font-geist-sans)" }}
+    >
       {/* ==== MJC Logo ==== */}
       <SvgMjcLogo className="size-25 translate-y-1/2 transform" />
       {/* ==== Card ==== */}

@@ -33,10 +33,12 @@ body,
 }
 
 /* Custom variables */
-@theme {
-  --color-primary: #ef4444;        /* red-500 */
+@theme inline {
+  --font-sans: var(--font-sawarabi-mincho), ui-serif, serif;
+  --font-sawarabi: var(--font-sawarabi-mincho), ui-serif, serif;
+  --color-primary: #ae0f0f;        
   --color-primary-dark: #dc2626;   /* red-600 */
-  --color-primary-light: #fef2f2;  /* red-50 */
+  --color-primary-light: #F93636;  
   --color-secondary: #111827;      /* gray-900 / black text */
   --color-secondary-light: #6b7280; /* gray-500 */
   --color-surface: #ffffff;
@@ -72,7 +74,7 @@ body,
 
   /* Cards */
   .card {
-    @apply rounded-2xl bg-surface p-4 transition-all duration-300 outline-none;
+    @apply bg-surface p-4 transition-all duration-300 outline-none;
     box-shadow: 6px 6px 12px #d1d5db, -6px -6px 12px #ffffff;
   }
 
