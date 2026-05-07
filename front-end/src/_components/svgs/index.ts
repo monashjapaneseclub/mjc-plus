@@ -10,3 +10,6 @@ export { default as ProfileIcon } from "./ProfileIcon";
 export { default as SvgEmail } from "./Email";
 export { default as SvgInstagram } from "./Instagram";
 export { default as SvgDiscord } from "./Discord";
+export { default as SvgClock } from "./Clock";
+export { default as SvgBookOpen } from "./BookOpen";
+export { default as SvgProgressCircle } from "./ProgressCircle";

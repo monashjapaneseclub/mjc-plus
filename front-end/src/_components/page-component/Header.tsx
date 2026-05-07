@@ -6,7 +6,7 @@ import MjcLogo from "../ui/MjcLogo";
 import { useAuthSessionContext } from "@/src/_contexts/AuthSessionContext";
 import ProfileMenu from "../ui/ProfileMenu";
 
-const navItems = ["Home", "Modules", "About Us", "Sponsors"];
+const navItems = ["Home", "Chapters", "About Us", "Sponsors"];
 
 const Header = () => {
   const session = useAuthSessionContext();

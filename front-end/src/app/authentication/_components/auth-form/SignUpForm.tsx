@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useReducer, ActionDispatch, useState } from "react";
+import { FormEvent, useReducer, ActionDispatch } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
 import { supabase } from "@/src/app/supabase-client";
@@ -106,7 +106,6 @@ const SignUpForm = () => {
   /* ==== States ==== */
   const [state, dispatch] = useReducer(reducer, initialState);
   const { email, password, emailError, passwordError, confirmEmail, confirmPassword, confirmEmailError, confirmPasswordError } = state;
-  const [isLoading, setIsLoading] = useState(false);
 
   /* ==== Handlers ==== */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -114,9 +113,7 @@ const SignUpForm = () => {
     const hasError = validateFormFields(email, password, confirmEmail, confirmPassword, dispatch);
     if (hasError) return;
 
-    setIsLoading(true);
     const { data, error } = await supabase.auth.signUp({ email, password });
-    setIsLoading(false);
 
     if (error) {
       if (error.status === 422) {
@@ -206,11 +203,10 @@ const SignUpForm = () => {
 
       {/* ==== Button ==== */}
       <Button
-        className="mt-3 w-full bg-black py-3 text-white transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-3 w-full bg-black py-3 text-white transition duration-200"
         type="submit"
-        disabled={isLoading}
       >
-        {isLoading ? "Signing up..." : "Sign Up"}
+        Sign Up
       </Button>
     </form>
   );
